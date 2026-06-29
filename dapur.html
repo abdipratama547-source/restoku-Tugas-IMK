@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RESTOKU — Dapur</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="icon" href="images/logo.png" />
+  <link rel="stylesheet" href="css/dapur.css" />
+</head>
+<body>
+  <div class="dp-shell">
+
+    <!-- ===== Sidebar ===== -->
+    <aside class="dp-sidebar" id="sidebar">
+      <div class="dp-sidebar__brand">
+        <img src="images/logo.png" alt="Logo" />
+        <div>
+          <span class="dp-sidebar__name">Restoku</span>
+          <span class="dp-sidebar__role">Panel Dapur</span>
+        </div>
+      </div>
+
+      <nav class="dp-nav">
+        <button class="dp-nav__item is-active" data-page="pesanan">
+          <span class="dp-nav__icon">🍽️</span>
+          <span>Pesanan</span>
+          <span class="dp-nav__badge" id="nav-badge" style="display:none">0</span>
+        </button>
+        <button class="dp-nav__item" data-page="stok">
+          <span class="dp-nav__icon">📦</span>
+          <span>Stok Bahan</span>
+        </button>
+        <button class="dp-nav__item" data-page="statistik">
+          <span class="dp-nav__icon">📊</span>
+          <span>Statistik</span>
+        </button>
+      </nav>
+
+      <div class="dp-sidebar__status">
+        <span class="dp-status-dot"></span>
+        <span>Dapur aktif</span>
+      </div>
+    </aside>
+
+    <!-- ===== Main ===== -->
+    <main class="dp-main">
+
+      <header class="dp-topbar">
+        <button class="dp-menu-toggle" id="menu-toggle" aria-label="Buka menu">☰</button>
+        <h1 class="dp-topbar__title" id="page-title">Pesanan Masuk</h1>
+        <div class="dp-topbar__right">
+          <span id="clock" class="dp-clock"></span>
+          <button class="dp-btn dp-btn--ghost" id="clear-done-btn">Bersihkan Selesai</button>
+        </div>
+      </header>
+
+      <!-- PAGE: PESANAN -->
+      <section class="dp-page is-active" id="page-pesanan">
+        <div class="dp-orders-filter">
+          <button class="dp-filter-btn is-active" data-filter="semua">Semua</button>
+          <button class="dp-filter-btn" data-filter="baru">🔴 Baru</button>
+          <button class="dp-filter-btn" data-filter="diproses">🟡 Diproses</button>
+          <button class="dp-filter-btn" data-filter="selesai">🟢 Selesai</button>
+        </div>
+
+        <!-- Point 5: Empty state visual -->
+        <div class="dp-empty" id="orders-empty" style="display:none">
+          <div class="dp-empty__art">
+            <div class="dp-empty__pan">🍳</div>
+            <div class="dp-empty__steam">
+              <span></span><span></span><span></span>
+            </div>
+          </div>
+          <p class="dp-empty__title">Dapur masih sepi</p>
+          <p class="dp-empty__sub">Pesanan dari customer akan muncul otomatis di sini saat mereka selesai memesan. Saatnya persiapkan bahan!</p>
+        </div>
+
+        <div class="dp-order-list" id="order-list"></div>
+      </section>
+
+      <!-- PAGE: STOK -->
+      <section class="dp-page" id="page-stok">
+        <div class="dp-stok-header">
+          <h2>Stok Bahan Baku</h2>
+          <button class="dp-btn dp-btn--primary" id="add-stok-btn">+ Tambah Bahan</button>
+        </div>
+        <div class="dp-stok-grid" id="stok-grid"></div>
+
+        <div class="dp-modal-overlay" id="stok-modal" style="display:none">
+          <div class="dp-modal">
+            <h3 id="modal-title">Tambah Bahan</h3>
+            <label>Nama Bahan
+              <input type="text" id="stok-nama" placeholder="cth: Tepung Terigu" />
+            </label>
+            <label>Stok Saat Ini
+              <input type="number" id="stok-qty" placeholder="cth: 500" min="0" />
+            </label>
+            <label>Satuan
+              <input type="text" id="stok-satuan" placeholder="cth: gram, butir, liter" />
+            </label>
+            <label>Batas Minimum (peringatan)
+              <input type="number" id="stok-min" placeholder="cth: 100" min="0" />
+            </label>
+            <div class="dp-modal__actions">
+              <button class="dp-btn dp-btn--ghost" id="modal-cancel">Batal</button>
+              <button class="dp-btn dp-btn--primary" id="modal-save">Simpan</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- PAGE: STATISTIK -->
+      <section class="dp-page" id="page-statistik">
+        <div class="dp-stat-cards">
+          <div class="dp-stat-card">
+            <span class="dp-stat-card__label">Total Pesanan (Semua)</span>
+            <span class="dp-stat-card__value" id="stat-total-order">0</span>
+          </div>
+          <div class="dp-stat-card">
+            <span class="dp-stat-card__label">Pendapatan Hari Ini</span>
+            <span class="dp-stat-card__value" id="stat-pendapatan">Rp 0</span>
+          </div>
+          <div class="dp-stat-card">
+            <span class="dp-stat-card__label">Rata-rata per Pesanan</span>
+            <span class="dp-stat-card__value" id="stat-avg">Rp 0</span>
+          </div>
+          <div class="dp-stat-card">
+            <span class="dp-stat-card__label">Selesai Hari Ini</span>
+            <span class="dp-stat-card__value" id="stat-selesai">0</span>
+          </div>
+        </div>
+
+        <div class="dp-stat-section">
+          <h3>Menu Terlaris</h3>
+          <div id="top-menu-list" class="dp-top-menu"></div>
+        </div>
+
+        <div class="dp-stat-section">
+          <h3>Penjualan 7 Hari Terakhir</h3>
+          <div class="dp-chart-wrap">
+            <canvas id="sales-chart" height="180"></canvas>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <div class="dp-toast" id="dp-toast"></div>
+  <script src="js/dapur.js"></script>
+</body>
+</html>

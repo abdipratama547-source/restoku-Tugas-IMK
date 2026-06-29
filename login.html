@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RESTOKU — Log in</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="icon" href="images/logo.png" />
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    body { background: var(--gray-200); }
+    .app { min-height: 100dvh; display: flex; flex-direction: column; }
+
+    .login-back {
+      padding: 16px 20px 0;
+    }
+    .login-back a {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: .85rem; color: var(--ink-soft); text-decoration: none;
+    }
+    .login-back svg { width: 16px; height: 16px; }
+
+    /* Hero area */
+    .login-hero-wrap {
+      display: flex; flex-direction: column; align-items: center;
+      padding: 32px 20px 28px;
+      text-align: center;
+    }
+    .login-brand-logo {
+      width: 72px; height: 72px;
+      background: linear-gradient(135deg, var(--brand-1), var(--brand-2));
+      border-radius: 20px;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 8px 24px var(--brand-glow);
+      margin-bottom: 16px;
+    }
+    .login-brand-logo img { width: 46px; height: 46px; object-fit: contain; }
+    .login-brand-name {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.5rem; font-weight: 700; color: var(--ink);
+      letter-spacing: -.3px;
+    }
+    .login-brand-sub {
+      font-size: .85rem; color: var(--ink-soft); margin-top: 4px;
+    }
+
+    /* Card */
+    .login-card {
+      background: #fff;
+      border-radius: 24px 24px 0 0;
+      padding: 28px 24px 40px;
+      flex: 1;
+      box-shadow: 0 -4px 24px rgba(0,0,0,.06);
+    }
+    .login-card__title {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.1rem; font-weight: 700; color: var(--ink);
+      margin: 0 0 22px;
+    }
+
+    .login-field { margin-bottom: 16px; }
+    .login-field label {
+      display: block; font-size: .8rem; font-weight: 600;
+      color: var(--ink-soft); margin-bottom: 7px;
+      text-transform: uppercase; letter-spacing: .5px;
+    }
+    .login-input-wrap {
+      position: relative;
+    }
+    .login-input-wrap .field-icon {
+      position: absolute; left: 14px; top: 50%; transform: translateY(-50%);
+      font-size: 1rem; pointer-events: none; line-height: 1;
+    }
+    .login-field input {
+      width: 100%; box-sizing: border-box;
+      padding: 13px 14px 13px 42px;
+      border: 1.5px solid rgba(0,0,0,.1);
+      border-radius: 12px;
+      font-size: .95rem; font-family: inherit; color: var(--ink);
+      background: var(--gray-200);
+      transition: border-color .2s, box-shadow .2s;
+      outline: none;
+    }
+    .login-field input:focus {
+      border-color: var(--brand-1);
+      box-shadow: 0 0 0 3px var(--brand-glow);
+      background: #fff;
+    }
+    .login-field input::placeholder { color: #bbb; }
+
+    /* Show/hide password */
+    .toggle-pw {
+      position: absolute; right: 14px; top: 50%; transform: translateY(-50%);
+      background: none; border: none; cursor: pointer;
+      font-size: .78rem; color: var(--ink-soft); padding: 4px;
+    }
+
+    /* Forgot */
+    .login-forgot {
+      display: block; text-align: right;
+      font-size: .8rem; color: var(--brand-1);
+      text-decoration: none; margin-top: -8px; margin-bottom: 22px;
+    }
+
+    /* Submit */
+    .login-submit {
+      width: 100%; padding: 14px;
+      background: linear-gradient(135deg, var(--brand-1), var(--brand-2));
+      color: #fff; font-weight: 700; font-size: 1rem;
+      border: none; border-radius: 14px;
+      font-family: inherit; cursor: pointer;
+      box-shadow: 0 6px 18px var(--brand-glow);
+      transition: transform .1s, box-shadow .15s;
+    }
+    .login-submit:active { transform: scale(.97); box-shadow: none; }
+
+    /* Divider */
+    .login-divider {
+      display: flex; align-items: center; gap: 12px;
+      margin: 20px 0;
+    }
+    .login-divider::before, .login-divider::after {
+      content: ''; flex: 1; height: 1px; background: rgba(0,0,0,.08);
+    }
+    .login-divider span { font-size: .78rem; color: var(--ink-soft); white-space: nowrap; }
+
+    /* Dapur shortcut */
+    .login-dapur-btn {
+      width: 100%; padding: 13px;
+      background: transparent;
+      border: 1.5px solid rgba(0,0,0,.1);
+      border-radius: 14px;
+      font-size: .92rem; font-weight: 600; color: var(--ink);
+      font-family: inherit; cursor: pointer;
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      transition: border-color .2s;
+    }
+    .login-dapur-btn:active { opacity: .7; }
+
+    /* Footer */
+    .login-foot {
+      text-align: center; font-size: .82rem;
+      color: var(--ink-soft); margin-top: 20px;
+    }
+    .login-foot a { color: var(--brand-1); font-weight: 600; text-decoration: none; }
+
+    /* Error msg */
+    .login-error {
+      background: #ffeaea; border-radius: 10px;
+      padding: 10px 14px; margin-bottom: 16px;
+      font-size: .82rem; color: #c0392b; display: none;
+    }
+    .login-error.show { display: block; }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <div class="login-back">
+      <a href="index.html">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M15 18l-6-6 6-6" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+        Kembali ke menu
+      </a>
+    </div>
+
+    <div class="login-hero-wrap">
+      <div class="login-brand-logo">
+        <img src="images/logo.png" alt="Logo RESTOKU" />
+      </div>
+      <div class="login-brand-name">RESTOKU</div>
+      <div class="login-brand-sub">Masuk ke akun kamu</div>
+    </div>
+
+    <div class="login-card">
+      <p class="login-card__title">Selamat datang kembali 👋</p>
+
+      <div class="login-error" id="login-error">Email atau sandi tidak sesuai. Silakan coba lagi.</div>
+
+      <div class="login-field">
+        <label for="email">Email</label>
+        <div class="login-input-wrap">
+          <span class="field-icon">✉️</span>
+          <input type="email" id="email" placeholder="nama@email.com" autocomplete="email" required />
+        </div>
+      </div>
+
+      <div class="login-field">
+        <label for="sandi">Sandi</label>
+        <div class="login-input-wrap">
+          <span class="field-icon">🔒</span>
+          <input type="password" id="sandi" placeholder="Masukkan sandi" autocomplete="current-password" required />
+          <button type="button" class="toggle-pw" id="toggle-pw">Lihat</button>
+        </div>
+      </div>
+
+      <a href="#" class="login-forgot" id="lupa-sandi">Lupa sandi?</a>
+
+      <button type="button" class="login-submit" id="login-btn">Masuk</button>
+
+      <div class="login-divider"><span>atau</span></div>
+
+      <button type="button" class="login-dapur-btn" id="dapur-btn">
+        🍳 Masuk sebagai Tim Dapur
+      </button>
+
+      <p class="login-foot">Belum punya akun? <a href="#">Daftar di sini</a></p>
+    </div>
+  </div>
+
+  <script src="js/main.js"></script>
+  <script>
+    // Toggle password visibility
+    const pwInput  = document.getElementById("sandi");
+    const togglePw = document.getElementById("toggle-pw");
+    togglePw.addEventListener("click", () => {
+      const show = pwInput.type === "password";
+      pwInput.type = show ? "text" : "password";
+      togglePw.textContent = show ? "Sembunyikan" : "Lihat";
+    });
+
+    // Lupa sandi
+    document.getElementById("lupa-sandi").addEventListener("click", e => {
+      e.preventDefault();
+      showToast("Fitur lupa sandi akan segera tersedia");
+    });
+
+    // Login button
+    document.getElementById("login-btn").addEventListener("click", () => {
+      const email = document.getElementById("email").value.trim();
+      const sandi = document.getElementById("sandi").value;
+      const errEl = document.getElementById("login-error");
+      errEl.classList.remove("show");
+
+      if (!email || !sandi) {
+        errEl.textContent = "Harap isi email dan sandi terlebih dahulu.";
+        errEl.classList.add("show");
+        return;
+      }
+
+      // Simulasi login
+      showToast("Fitur login akan segera tersedia");
+      setTimeout(() => window.location.href = "index.html", 1000);
+    });
+
+    // Dapur shortcut
+    document.getElementById("dapur-btn").addEventListener("click", () => {
+      window.location.href = "dapur.html";
+    });
+  </script>
+</body>
+</html>

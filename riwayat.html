@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RESTOKU — Riwayat</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="icon" href="images/logo.png" />
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    /* ── Riwayat ── */
+    .history-list {
+      padding: 4px 16px 100px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    /* Card minimalis */
+    .hc {
+      background: var(--gray-200);
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 13px 14px;
+      cursor: pointer;
+      transition: opacity .15s;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .hc:active { opacity: .7; }
+    .hc__icon {
+      width: 40px; height: 40px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, var(--brand-1), var(--brand-2));
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .hc__icon img { width: 24px; height: 24px; object-fit: contain; }
+    .hc__body { flex: 1; min-width: 0; }
+    .hc__name {
+      font-weight: 700; font-size: .92rem; color: var(--ink);
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+    .hc__sub { font-size: .76rem; color: var(--ink-soft); margin-top: 1px; }
+    .hc__right { text-align: right; flex-shrink: 0; }
+    .hc__total { font-weight: 700; font-size: .9rem; color: var(--brand-1); }
+    .hc__status {
+      font-size: .68rem; font-weight: 700;
+      padding: 3px 8px; border-radius: 20px; margin-top: 3px; display: inline-block;
+    }
+    .hc__status--baru     { background:#fff3cd; color:#7a5800; }
+    .hc__status--diproses { background:#cff4fc; color:#0a4d5e; }
+    .hc__status--selesai  { background:#d1f4e0; color:#0a4e2a; }
+
+    /* Empty */
+    .history-empty-state {
+      display: flex; flex-direction: column; align-items: center;
+      padding: 60px 24px; text-align: center; gap: 10px;
+    }
+    .history-empty-state__icon { font-size: 3.2rem; line-height: 1; }
+    .history-empty-state__title {
+      font-family:'Poppins',sans-serif; font-size:1.05rem;
+      font-weight:700; color:var(--ink); margin:0;
+    }
+    .history-empty-state__desc { font-size:.85rem; color:var(--ink-soft); margin:0; }
+    .history-empty-state__btn {
+      margin-top:10px; display:inline-block;
+      background:linear-gradient(135deg,var(--brand-1),var(--brand-2));
+      color:#fff; font-weight:600; font-size:.9rem;
+      padding:11px 26px; border-radius:var(--radius-md); text-decoration:none;
+      box-shadow:0 4px 12px var(--brand-glow);
+    }
+
+    .history-clear-btn {
+      display:block; margin:4px 16px 24px;
+      padding:11px; background:transparent;
+      border:1.5px solid rgba(0,0,0,.1);
+      border-radius:var(--radius-md);
+      font-size:.83rem; font-weight:600; color:var(--ink-soft);
+      cursor:pointer; text-align:center; width:calc(100% - 32px);
+    }
+
+    /* ── Struk Overlay ── */
+    .struk-overlay {
+      position:fixed; inset:0;
+      background:rgba(0,0,0,.55);
+      backdrop-filter:blur(6px);
+      z-index:300;
+      display:flex; align-items:flex-end; justify-content:center;
+      opacity:0; pointer-events:none;
+      transition:opacity .25s;
+    }
+    .struk-overlay.is-open { opacity:1; pointer-events:auto; }
+
+    .struk-sheet {
+      background:#fff;
+      border-radius:22px 22px 0 0;
+      width:100%; max-width:var(--max-width);
+      max-height:88vh; overflow-y:auto;
+      padding:0 0 40px;
+      transform:translateY(100%);
+      transition:transform .32s cubic-bezier(.34,1.18,.64,1);
+    }
+    .struk-overlay.is-open .struk-sheet { transform:translateY(0); }
+
+    .struk-handle {
+      width:40px; height:4px;
+      background:rgba(0,0,0,.15); border-radius:2px;
+      margin:12px auto 0;
+    }
+
+    .struk-inner {
+      padding:20px 20px 0;
+    }
+
+    .struk-top {
+      display:flex; align-items:center; gap:14px;
+      padding-bottom:16px;
+      border-bottom:1px dashed rgba(0,0,0,.1);
+      margin-bottom:16px;
+    }
+    .struk-top__logo {
+      width:48px; height:48px; border-radius:12px;
+      background:linear-gradient(135deg,var(--brand-1),var(--brand-2));
+      display:flex; align-items:center; justify-content:center;
+    }
+    .struk-top__logo img { width:30px; height:30px; object-fit:contain; }
+    .struk-top__info { flex:1; }
+    .struk-top__brand { font-family:'Poppins',sans-serif; font-weight:700; font-size:1.05rem; color:var(--ink); }
+    .struk-top__id { font-size:.73rem; color:var(--ink-soft); margin-top:2px; }
+
+    .struk-meta {
+      display:grid; grid-template-columns:1fr 1fr;
+      gap:10px; margin-bottom:16px;
+    }
+    .struk-meta__item { }
+    .struk-meta__label { font-size:.72rem; color:var(--ink-soft); }
+    .struk-meta__value { font-weight:600; font-size:.88rem; color:var(--ink); margin-top:1px; }
+
+    .struk-items { margin-bottom:16px; }
+    .struk-item {
+      display:flex; justify-content:space-between;
+      align-items:flex-start; padding:8px 0;
+      border-bottom:1px solid rgba(0,0,0,.06);
+      gap:8px;
+    }
+    .struk-item:last-child { border-bottom:none; }
+    .struk-item__left { flex:1; }
+    .struk-item__name { font-size:.88rem; font-weight:500; color:var(--ink); }
+    .struk-item__note { font-size:.75rem; color:var(--ink-soft); margin-top:1px; }
+    .struk-item__qty { font-size:.82rem; color:var(--ink-soft); min-width:28px; text-align:center; }
+    .struk-item__price { font-size:.88rem; font-weight:600; color:var(--ink); min-width:70px; text-align:right; }
+
+    .struk-total-wrap {
+      background:var(--gray-200);
+      border-radius:12px;
+      padding:14px 16px;
+      margin-bottom:20px;
+    }
+    .struk-total-row {
+      display:flex; justify-content:space-between;
+      font-size:.83rem; color:var(--ink-soft);
+      padding:3px 0;
+    }
+    .struk-total-row--main {
+      font-size:1rem; font-weight:700; color:var(--ink);
+      border-top:1px solid rgba(0,0,0,.08);
+      margin-top:6px; padding-top:10px;
+    }
+    .struk-total-row--main span:last-child { color:var(--brand-1); }
+
+    .struk-status-row {
+      display:flex; align-items:center; gap:8px;
+      font-size:.82rem; color:var(--ink-soft);
+      margin-bottom:20px;
+    }
+    .struk-status-badge {
+      font-size:.72rem; font-weight:700;
+      padding:4px 10px; border-radius:20px;
+    }
+    .struk-status-badge--selesai { background:#d1f4e0; color:#0a4e2a; }
+    .struk-status-badge--diproses{ background:#cff4fc; color:#0a4d5e; }
+    .struk-status-badge--baru    { background:#fff3cd; color:#7a5800; }
+
+    .struk-close-btn {
+      display:block; width:100%;
+      padding:13px; border:none; border-radius:var(--radius-md);
+      background:linear-gradient(135deg,var(--brand-1),var(--brand-2));
+      color:#fff; font-weight:700; font-size:.95rem;
+      cursor:pointer; font-family:inherit;
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <header class="topnav">
+      <a href="index.html" class="topnav__brand">
+        <img src="images/logo.png" alt="Logo RESTOKU" />
+        <span class="topnav__brand-text">Restoku</span>
+      </a>
+            <button class="topnav__hamburger" id="nav-hamburger" aria-label="Menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="topnav__dropdown" id="nav-dropdown">
+        <a href="tentang.html"><span class="nav-icon">📖</span> Tentang</a>
+        <a href="bantuan.html"><span class="nav-icon">❓</span> Bantuan</a>
+        <a href="riwayat.html" class="is-active"><span class="nav-icon">🕑</span> Riwayat</a>
+        <a href="login.html"><span class="nav-icon">👤</span> Log in</a>
+      </div>
+      <div class="nav-dim" id="nav-dim"></div>
+    </header>
+
+    <h1 class="page-heading">Riwayat Pesanan</h1>
+    <div id="history-container"></div>
+  </div>
+
+  <!-- Struk Overlay -->
+  <div class="struk-overlay" id="struk-overlay">
+    <div class="struk-sheet">
+      <div class="struk-handle"></div>
+      <div class="struk-inner" id="struk-content"></div>
+    </div>
+  </div>
+
+  <script src="js/main.js"></script>
+  <script>
+  (function () {
+    const ORDERS_KEY = "restoku_orders";
+    const container  = document.getElementById("history-container");
+    const overlay    = document.getElementById("struk-overlay");
+    const content    = document.getElementById("struk-content");
+
+    function formatRupiah(n) {
+      return "Rp." + Number(n).toLocaleString("id-ID");
+    }
+    function formatTime(ts) {
+      const d = new Date(ts);
+      const p = n => String(n).padStart(2,"0");
+      return `${p(d.getDate())}/${p(d.getMonth()+1)}/${d.getFullYear()}, ${p(d.getHours())}:${p(d.getMinutes())}`;
+    }
+    function statusLabel(s) {
+      return {baru:"Diterima",diproses:"Dimasak",selesai:"Selesai"}[s] || s;
+    }
+
+    function openStruk(order) {
+      const items = Object.values(order.items || {});
+      const subtotal = items.reduce((s,i) => s + i.price * i.qty, 0);
+
+      const itemsHTML = items.map(i => `
+        <div class="struk-item">
+          <div class="struk-item__left">
+            <div class="struk-item__name">${i.name}</div>
+            ${i.note ? `<div class="struk-item__note">📝 ${i.note}</div>` : ""}
+          </div>
+          <div class="struk-item__qty">×${i.qty}</div>
+          <div class="struk-item__price">${formatRupiah(i.price * i.qty)}</div>
+        </div>`).join("");
+
+      const shortId = (order.id || "").slice(-8).toUpperCase();
+      const statusCls = `struk-status-badge--${order.status || "selesai"}`;
+
+      content.innerHTML = `
+        <div class="struk-top">
+          <div class="struk-top__logo"><img src="images/logo.png" alt="" /></div>
+          <div class="struk-top__info">
+            <div class="struk-top__brand">RESTOKU</div>
+            <div class="struk-top__id">ID: ${shortId}</div>
+          </div>
+          <span class="struk-status-badge ${statusCls}">${statusLabel(order.status)}</span>
+        </div>
+
+        <div class="struk-meta">
+          <div class="struk-meta__item">
+            <div class="struk-meta__label">Nama</div>
+            <div class="struk-meta__value">${order.nama || "-"}</div>
+          </div>
+          <div class="struk-meta__item">
+            <div class="struk-meta__label">No. Meja</div>
+            <div class="struk-meta__value">${order.meja || "-"}</div>
+          </div>
+          <div class="struk-meta__item">
+            <div class="struk-meta__label">Waktu Pesan</div>
+            <div class="struk-meta__value">${formatTime(order.ts)}</div>
+          </div>
+          <div class="struk-meta__item">
+            <div class="struk-meta__label">Jumlah Item</div>
+            <div class="struk-meta__value">${items.reduce((s,i)=>s+i.qty,0)} item</div>
+          </div>
+        </div>
+
+        <div class="struk-items">${itemsHTML}</div>
+
+        <div class="struk-total-wrap">
+          <div class="struk-total-row">
+            <span>Subtotal</span><span>${formatRupiah(subtotal)}</span>
+          </div>
+          <div class="struk-total-row">
+            <span>Biaya Layanan</span><span>Gratis</span>
+          </div>
+          <div class="struk-total-row struk-total-row--main">
+            <span>Total</span><span>${formatRupiah(order.total)}</span>
+          </div>
+        </div>
+
+        <button class="struk-close-btn" id="struk-close-btn">Tutup</button>
+      `;
+
+      overlay.classList.add("is-open");
+
+      document.getElementById("struk-close-btn").addEventListener("click", closeStruk);
+    }
+
+    function closeStruk() {
+      overlay.classList.remove("is-open");
+    }
+
+    overlay.addEventListener("click", e => { if (e.target === overlay) closeStruk(); });
+
+    function renderHistory() {
+      let orders = [];
+      try { orders = JSON.parse(localStorage.getItem(ORDERS_KEY) || "[]"); } catch(e) {}
+      orders = orders.slice().reverse();
+
+      container.innerHTML = "";
+
+      if (orders.length === 0) {
+        container.innerHTML = `
+          <div class="history-empty-state">
+            <div class="history-empty-state__icon">🍽️</div>
+            <p class="history-empty-state__title">Belum ada pesanan</p>
+            <p class="history-empty-state__desc">Riwayat pesanan kamu akan muncul di sini setelah memesan.</p>
+            <a href="index.html" class="history-empty-state__btn">Pesan Sekarang</a>
+          </div>`;
+        return;
+      }
+
+      const list = document.createElement("div");
+      list.className = "history-list";
+
+      orders.forEach(order => {
+        const items = Object.values(order.items || {});
+        const totalItems = items.reduce((s,i)=>s+i.qty,0);
+        const statusCls  = `hc__status--${order.status || "selesai"}`;
+
+        const card = document.createElement("div");
+        card.className = "hc";
+        card.innerHTML = `
+          <div class="hc__icon"><img src="images/logo.png" alt="" /></div>
+          <div class="hc__body">
+            <div class="hc__name">${order.nama || "-"} · Meja ${order.meja || "-"}</div>
+            <div class="hc__sub">${formatTime(order.ts)} · ${totalItems} item</div>
+          </div>
+          <div class="hc__right">
+            <div class="hc__total">${formatRupiah(order.total)}</div>
+            <span class="hc__status ${statusCls}">${statusLabel(order.status)}</span>
+          </div>`;
+        card.addEventListener("click", () => openStruk(order));
+        list.appendChild(card);
+      });
+
+      container.appendChild(list);
+
+      const clearBtn = document.createElement("button");
+      clearBtn.className = "history-clear-btn";
+      clearBtn.textContent = "🗑️  Hapus Semua Riwayat";
+      clearBtn.addEventListener("click", () => {
+        if (confirm("Hapus semua riwayat pesanan?")) {
+          localStorage.removeItem(ORDERS_KEY);
+          renderHistory();
+        }
+      });
+      container.appendChild(clearBtn);
+    }
+
+    renderHistory();
+  })();
+  </script>
+</body>
+</html>

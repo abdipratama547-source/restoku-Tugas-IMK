@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RESTOKU — Tentang</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="icon" href="images/logo.png" />
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    /* ── About Page Styles ── */
+    .about-hero {
+      background: linear-gradient(135deg, var(--brand-1) 0%, var(--brand-2) 100%);
+      margin: 0 16px 24px;
+      border-radius: 20px;
+      padding: 32px 24px 28px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .about-hero::before {
+      content: '';
+      position: absolute;
+      top: -40px; right: -40px;
+      width: 140px; height: 140px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.08);
+    }
+    .about-hero::after {
+      content: '';
+      position: absolute;
+      bottom: -30px; left: -30px;
+      width: 100px; height: 100px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.06);
+    }
+    .about-hero__logo {
+      width: 72px;
+      height: 72px;
+      background: rgba(255,255,255,0.15);
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 16px;
+      backdrop-filter: blur(4px);
+    }
+    .about-hero__logo img {
+      width: 48px;
+      height: 48px;
+      object-fit: contain;
+    }
+    .about-hero__title {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: #fff;
+      margin: 0 0 8px;
+      letter-spacing: -0.3px;
+    }
+    .about-hero__tagline {
+      font-size: 0.92rem;
+      color: rgba(255,255,255,0.85);
+      margin: 0;
+      line-height: 1.5;
+    }
+
+    .about-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin: 0 16px 24px;
+    }
+    .about-stat {
+      background: var(--gray-200);
+      border-radius: 14px;
+      padding: 16px 10px;
+      text-align: center;
+    }
+    .about-stat__value {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--brand-1);
+      display: block;
+    }
+    .about-stat__label {
+      font-size: 0.72rem;
+      color: var(--ink-soft);
+      margin-top: 2px;
+      display: block;
+    }
+
+    .about-section {
+      margin: 0 16px 20px;
+    }
+    .about-section__title {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--ink);
+      margin: 0 0 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .about-section__title .icon {
+      width: 30px;
+      height: 30px;
+      border-radius: 8px;
+      background: linear-gradient(135deg, var(--brand-1), var(--brand-2));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.95rem;
+      flex-shrink: 0;
+    }
+
+    .about-card {
+      background: var(--gray-200);
+      border-radius: 16px;
+      padding: 18px;
+    }
+    .about-card p {
+      margin: 0;
+      font-size: 0.9rem;
+      color: var(--ink-soft);
+      line-height: 1.65;
+    }
+
+    .about-values {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .about-value {
+      background: var(--gray-200);
+      border-radius: 14px;
+      padding: 14px 16px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .about-value__emoji {
+      font-size: 1.6rem;
+      flex-shrink: 0;
+      line-height: 1;
+    }
+    .about-value__text strong {
+      display: block;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 2px;
+    }
+    .about-value__text span {
+      font-size: 0.82rem;
+      color: var(--ink-soft);
+      line-height: 1.4;
+    }
+
+    .about-founder {
+      background: var(--gray-200);
+      border-radius: 16px;
+      padding: 18px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .about-founder__avatar {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--brand-1), var(--brand-2));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      flex-shrink: 0;
+    }
+    .about-founder__name {
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: var(--ink);
+    }
+    .about-founder__role {
+      font-size: 0.8rem;
+      color: var(--ink-soft);
+      margin-top: 2px;
+    }
+    .about-founder__quote {
+      font-size: 0.82rem;
+      color: var(--ink-soft);
+      font-style: italic;
+      margin-top: 6px;
+      line-height: 1.4;
+    }
+
+    .about-bottom-space { height: 32px; }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <header class="topnav">
+      <a href="index.html" class="topnav__brand">
+        <img src="images/logo.png" alt="Logo RESTOKU" />
+        <span class="topnav__brand-text">Restoku</span>
+      </a>
+            <button class="topnav__hamburger" id="nav-hamburger" aria-label="Menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="topnav__dropdown" id="nav-dropdown">
+        <a href="tentang.html" class="is-active"><span class="nav-icon">📖</span> Tentang</a>
+        <a href="bantuan.html"><span class="nav-icon">❓</span> Bantuan</a>
+        <a href="riwayat.html"><span class="nav-icon">🕑</span> Riwayat</a>
+        <a href="login.html"><span class="nav-icon">👤</span> Log in</a>
+      </div>
+      <div class="nav-dim" id="nav-dim"></div>
+    </header>
+
+    <!-- Hero -->
+    <div class="about-hero">
+      <div class="about-hero__logo">
+        <img src="images/logo.png" alt="RESTOKU" />
+      </div>
+      <h1 class="about-hero__title">RESTOKU</h1>
+      <p class="about-hero__tagline">Cita rasa autentik Indonesia,<br>diolah dengan cinta setiap harinya.</p>
+    </div>
+
+    <!-- Stats -->
+    <div class="about-stats">
+      <div class="about-stat">
+        <span class="about-stat__value">2025</span>
+        <span class="about-stat__label">Berdiri</span>
+      </div>
+      <div class="about-stat">
+        <span class="about-stat__value">32+</span>
+        <span class="about-stat__label">Pilihan Menu</span>
+      </div>
+      <div class="about-stat">
+        <span class="about-stat__value">⭐ 4.8</span>
+        <span class="about-stat__label">Rating</span>
+      </div>
+    </div>
+
+    <!-- Cerita Kami -->
+    <div class="about-section">
+      <h2 class="about-section__title">
+        <span class="icon">📖</span> Cerita Kami
+      </h2>
+      <div class="about-card">
+        <p>Berawal dari dapur keluarga kecil yang penuh aroma rempah, <strong>RESTOKU</strong> hadir dengan satu tekad: menyajikan hidangan ayam berkualitas dengan cita rasa khas Indonesia yang hangat dan memanjakan lidah. Setiap menu diolah dengan bahan segar pilihan dan bumbu yang diracik sendiri setiap harinya.</p>
+      </div>
+    </div>
+
+    <!-- Nilai Kami -->
+    <div class="about-section">
+      <h2 class="about-section__title">
+        <span class="icon">💡</span> Nilai Kami
+      </h2>
+      <div class="about-values">
+        <div class="about-value">
+          <div class="about-value__emoji">🌿</div>
+          <div class="about-value__text">
+            <strong>Bahan Segar</strong>
+            <span>Kami memilih bahan terbaik setiap hari, tanpa kompromi soal kualitas.</span>
+          </div>
+        </div>
+        <div class="about-value">
+          <div class="about-value__emoji">🍳</div>
+          <div class="about-value__text">
+            <strong>Dimasak dengan Hati</strong>
+            <span>Setiap hidangan adalah karya, bukan sekadar pesanan.</span>
+          </div>
+        </div>
+        <div class="about-value">
+          <div class="about-value__emoji">😊</div>
+          <div class="about-value__text">
+            <strong>Pelanggan Utama</strong>
+            <span>Senyum pelanggan adalah ukuran keberhasilan kami.</span>
+          </div>
+        </div>
+        <div class="about-value">
+          <div class="about-value__emoji">🚀</div>
+          <div class="about-value__text">
+            <strong>Terus Berkembang</strong>
+            <span>Kami terus berinovasi agar selalu jadi pilihan terbaik untuk keluarga.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pendiri -->
+    <div class="about-section">
+      <h2 class="about-section__title">
+        <span class="icon">👤</span> Pendiri
+      </h2>
+      <div class="about-founder">
+        <div class="about-founder__avatar">👨‍🍳</div>
+        <div>
+          <div class="about-founder__name">Ahmad Pratama</div>
+          <div class="about-founder__role">CEO & Pendiri Restoku</div>
+          <div class="about-founder__quote">"Makanan yang baik bukan hanya soal rasa — tapi soal kenangan yang tercipta di setiap meja."</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="about-bottom-space"></div>
+  </div>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

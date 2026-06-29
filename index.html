@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RESTOKU — Menu</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="icon" href="images/logo.png" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <div class="app">
+    <header class="topnav">
+      <a href="index.html" class="topnav__brand">
+        <img src="images/logo.png" alt="Logo RESTOKU" />
+        <span class="topnav__brand-text">Restoku</span>
+      </a>
+            <button class="topnav__hamburger" id="nav-hamburger" aria-label="Menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="topnav__dropdown" id="nav-dropdown">
+        <a href="tentang.html"><span class="nav-icon">📖</span> Tentang</a>
+        <a href="bantuan.html"><span class="nav-icon">❓</span> Bantuan</a>
+        <a href="riwayat.html"><span class="nav-icon">🕑</span> Riwayat</a>
+        <a href="login.html"><span class="nav-icon">👤</span> Log in</a>
+      </div>
+      <div class="nav-dim" id="nav-dim"></div>
+    </header>
+
+    <section class="ad-banner" id="ad-banner">
+      <div class="ad-banner__slides" id="banner-slides">
+        <div class="ad-banner__slide is-active">
+          <img src="images/banner1.png" alt="Promo Restoku" />
+        </div>
+        <div class="ad-banner__slide">
+          <img src="images/banner2.png" alt="Menu Spesial" />
+        </div>
+        <div class="ad-banner__slide">
+          <img src="images/banner3.png" alt="Penawaran Hari Ini" />
+        </div>
+      </div>
+      <button class="ad-banner__arrow ad-banner__arrow--prev" id="banner-prev" aria-label="Sebelumnya">‹</button>
+      <button class="ad-banner__arrow ad-banner__arrow--next" id="banner-next" aria-label="Selanjutnya">›</button>
+      <div class="ad-banner__dots" id="banner-dots">
+        <span class="active" data-slide="0"></span>
+        <span data-slide="1"></span>
+        <span data-slide="2"></span>
+      </div>
+    </section>
+
+    <div class="tabs">
+      <button class="tab is-active" data-category="makanan">Makanan</button>
+      <button class="tab" data-category="minuman">Minuman</button>
+      <button class="tab" data-category="camilan">Camilan</button>
+    </div>
+
+    <main>
+      <div class="menu-grid" data-category-panel="makanan" style="display: grid;">
+        <article class="menu-card" data-id="ayam-kecap" data-name="Ayam Kecap" data-price="17000" data-desc="Sayap ayam yang dimasak dengan saus kecap manis gurih dan taburan wijen, empuk dan meresap sampai ke dalam.">
+          <div class="menu-card__img-wrap">
+            <img src="images/food1.jpg" alt="Ayam Kecap" loading="lazy" />
+          </div>
+          <span class="menu-card__qty"></span>
+          <p class="menu-card__name">Ayam Kecap</p>
+          <p class="menu-card__price">Rp.17.000</p>
+        </article>
+
+        <article class="menu-card" data-id="ayam-bakar-madu" data-name="Ayam Bakar Madu" data-price="18000" data-desc="Ayam bakar dengan olesan madu pilihan, dipanggang hingga karamel di luar dan tetap juicy di dalam.">
+          <div class="menu-card__img-wrap">
+            <img src="images/food3.jpg" alt="Ayam Bakar Madu" loading="lazy" />
+          </div>
+          <span class="menu-card__qty"></span>
+          <p class="menu-card__name">Ayam Bakar Madu</p>
+          <p class="menu-card__price">Rp.18.000</p>
+        </article>
+
+        <article class="menu-card" data-id="sate-ayam-lengkap" data-name="Sate Ayam Lengkap" data-price="20000" data-desc="Sate daging panggang lengkap dengan kentang goreng, tomat segar, dan acar bawang merah.">
+          <div class="menu-card__img-wrap">
+            <img src="images/food2.jpg" alt="Sate Ayam Lengkap" loading="lazy" />
+          </div>
+          <span class="menu-card__qty"></span>
+          <p class="menu-card__name">Sate Ayam Lengkap</p>
+          <p class="menu-card__price">Rp.20.000</p>
+        </article>
+
+        <article class="menu-card" data-id="ayam-goreng-crispy" data-name="Ayam Goreng Crispy" data-price="15000" data-desc="Ayam goreng tepung dengan lapisan renyah berbumbu rempah, gurih di setiap gigitan.">
+          <div class="menu-card__img-wrap is-placeholder">
+            <img src="images/food4.jpeg" alt="Kentang goreng" loading="lazy" />
+          </div>
+          <span class="menu-card__qty"></span>
+          <p class="menu-card__name">Ayam Goreng Crispy</p>
+          <p class="menu-card__price">Rp.15.000</p>
+        </article>
+
+        <article class="menu-card" data-id="ayam-geprek-sambal" data-name="Ayam Geprek Sambal" data-price="16000" data-desc="Ayam crispy yang digeprek bersama sambal bawang pedas khas, cocok buat pecinta rasa nendang.">
+          <div class="menu-card__img-wrap is-placeholder">
+            <img src="images/food5.jpeg" alt="Kentang goreng" loading="lazy" />
+          </div>
+          <span class="menu-card__qty"></span>
+          <p class="menu-card__name">Ayam Geprek Sambal</p>
+          <p class="menu-card__price">Rp.16.000</p>
+        </article>
+
+        <article class="menu-card" data-id="nasi-ayam-suwir" data-name="Nasi Ayam Suwir" data-price="14000" data-desc="Nasi hangat dengan suwiran ayam berbumbu manis pedas, disajikan dengan taburan bawang goreng.">
+          <div class="menu-card__img-wrap is-placeholder">
+            <img src="images/food6.jpeg" alt="Kentang goreng" loading="lazy" />
+          </div>
+          <span class="menu-card__qty"></span>
+          <p class="menu-card__name">Nasi Ayam Suwir</p>
+          <p class="menu-card__price">Rp.14.000</p>
+        </article>
+
+        <article class="menu-card" data-id="ayam-penyet" data-name="Ayam Penyet" data-price="16000" data-desc="Ayam goreng yang dipenyet bersama sambal terasi pedas dan lalapan segar.">
+          <div class="menu-card__img-wrap is-placeholder">
+            <img src="images/food7.jpeg" alt="Kentang goreng" loading="lazy" />
+          </div>
+          <span class="menu-card__qty"></span>
+          <p class="menu-card__name">Ayam Penyet</p>
+          <p class="menu-card__price">Rp.16.000</p>
+        </article>
+
+        <article class="menu-card" data-id="ayam-saus-padang" data-name="Ayam Saus Padang" data-price="19000" data-desc="Potongan ayam goreng disiram saus padang merah yang pedas, asam, dan kaya rempah.">
+          <div class="menu-card__img-wrap is-placeholder">
+            <img src="images/food8.jpeg" alt="Kentang goreng" loading="lazy" />
+          </div>
+          <span class="menu-card__qty"></span>
+          <p class="menu-card__name">Ayam Saus Padang</p>
+          <p class="menu-card__price">Rp.19.000</p>
+        </article>
+
+        <article class="menu-card" data-id="burger-ayam-crispy" data-name="Burger Ayam Crispy" data-price="22000" data-desc="Burger dengan ayam crispy, saus spesial, dan sayuran segar di antara roti lembut.">
+          <div class="menu-card__img-wrap is-placeholder">
+            <img src="images/food9.jpeg" alt="Kentang goreng" loading="lazy" />
+          </div>
+          <span class="menu-card__qty"></span>
+          <p class="menu-card__name">Burger Ayam Crispy</p>
+          <p class="menu-card__price">Rp.22.000</p>
+        </article>
+
+        <article class="menu-card" data-id="sup-ayam-jamur" data-name="Sup Ayam Jamur" data-price="15000" data-desc="Sup hangat berisi suwiran ayam dan jamur segar dengan kuah kaldu yang ringan dan gurih.">
+          <div class="menu-card__img-wrap is-placeholder">
+            <img src="images/food10.jpeg" alt="Kentang goreng" loading="lazy" />
+          </div>
+          <span class="menu-card__qty"></span>
+          <p class="menu-card__name">Sup Ayam Jamur</p>
+          <p class="menu-card__price">Rp.15.000</p>
+        </article>
+
+        <article class="menu-card" data-id="ayam-rica-rica" data-name="Ayam Rica-Rica" data-price="18000" data-desc="Ayam dimasak dengan bumbu rica-rica pedas khas Manado, kaya rempah dan menggugah selera.">
+          <div class="menu-card__img-wrap is-placeholder">
+            <img src="images/food11.jpeg" alt="Kentang goreng" loading="lazy" />
+          </div>
+          <span class="menu-card__qty"></span>
+          <p class="menu-card__name">Ayam Rica-Rica</p>
+          <p class="menu-card__price">Rp.18.000</p>
+        </article>
+
+        <article class="menu-card" data-id="soto-ayam" data-name="Soto Ayam" data-price="14000" data-desc="Soto ayam dengan kuah kuning gurih, suwiran ayam, soun, dan taburan bawang goreng.">
+          <div class="menu-card__img-wrap is-placeholder">
+            <img src="images/food12.jpeg" alt="Kentang goreng" loading="lazy" />
+          </div>
+          <span class="menu-card__qty"></span>
+          <p class="menu-card__name">Soto Ayam</p>
+          <p class="menu-card__price">Rp.14.000</p>
+        </article>
+      </div>
+
+      <div class="menu-grid" data-category-panel="minuman" style="display: none;">
+        <article class="menu-card" data-id="es-teh-manis" data-name="Es Teh Manis" data-price="5000" data-desc="Teh manis dingin yang menyegarkan, cocok menemani makan siang atau sore hari.">
+          <div class="menu-card__img-wrap is-placeholder">
+            <img src="images/man1.jpeg" alt="Kentang goreng" loading="lazy" />
+          </div>
+          <span class="menu-card__qty"></span>
+          <p class="menu-card__name">Es Teh Manis</p>
+          <p class="menu-card__price">Rp.5.000</p>
+        </article>
+
+        <article class="menu-card" data-id="es-jeruk-segar" data-name="Es Jeruk Segar" data-price="7000" data-desc="Perasan jeruk segar dengan es batu, manis asam yang menyegarkan tenggorokan.">
+          <div class="menu-card__img-wrap is-placeholder">
+            <img src="images/man2.jpeg" alt="Kentang goreng" loading="lazy" />
+          </div>
+          <span class="menu-card__qty"></span>
+          <p class="menu-card__name">Es Jeruk Segar</p>
+          <p class="menu-card__price">Rp.7.000</p>
+        </article>
+
+        <article class="menu-card" data-id="jus-alpukat" data-name="Jus Alpukat" data-price="12000" data-desc="Jus alpukat kental dan creamy dengan tambahan susu coklat di atasnya.">
+          <div class="menu-card__img-wrap is-placeholder">
+            <img src="images/man3.jpeg" alt="Kentang goreng" loading="lazy" />
+          </div>
+          <span class="menu-card__qty"></span>
+          <p class="menu-card__name">Jus Alpukat</p>
+          <p class="menu-card__price">Rp.12.000</p>
+        </article>
+
+        <article class="menu-card" data-id="kopi-susu" data-name="Kopi Susu" data-price="10000" data-desc="Kopi susu gula aren dengan rasa creamy dan sedikit pahit yang seimbang.">
+          <div class="menu-card__img-wrap is-placeholder">
+            <img src="images/man4.jpeg" alt="Kentang goreng" loading="lazy" />
+          </div>
+          <span class="menu-card__qty"></span>
+          <p class="menu-card__name">Kopi Susu</p>
+          <p class="menu-card__price">Rp.10.000</p>
+        </article>
+
+        <article class="menu-card" data-id="soda-gembira" data-name="Soda Gembira" data-price="8000" data-desc="Soda dengan sirup merah dan susu kental manis, segar dan penuh nostalgia.">
+          <div class="menu-card__img-wrap is-placeholder">
+            <img src="images/man5.jpeg" alt="Kentang goreng" loading="lazy" />
+          </div>
+          <span class="menu-card__qty"></span>
+          <p class="menu-card__name">Soda Gembira</p>
+          <p class="menu-card__price">Rp.8.000</p>
+        </article>
+
+        <article class="menu-card" data-id="air-mineral" data-name="Air Mineral" data-price="4000" data-desc="Air mineral dingin dalam kemasan, pilihan simpel buat menemani makanmu.">
+          <div class="menu-card__img-wrap is-placeholder">
+            <img src="images/man6.jpeg" alt="Kentang goreng" loading="lazy" />
+          </div>
+          <span class="menu-card__qty"></span>
+          <p class="menu-card__name">Air Mineral</p>
+          <p class="menu-card__price">Rp.4.000</p>
+        </article>
+
+        <article class="menu-card" data-id="es-lemon-tea" data-name="Es Lemon Tea" data-price="8000" data-desc="Teh segar dengan perasan lemon asli, manis asam yang menyegarkan.">
+          <div class="menu-card__img-wrap is-placeholder">
+            <img src="images/man7.jpeg" alt="Kentang goreng" loading="lazy" />
+          </div>
+          <span class="menu-card__qty"></span>
+          <p class="menu-card__name">Es Lemon Tea</p>
+          <p class="menu-card__price">Rp.8.000</p>
+        </article>
+
+        <article class="menu-card" data-id="susu-coklat-dingin" data-name="Susu Coklat Dingin" data-price="9000" data-desc="Susu coklat dingin yang creamy dan manis, favorit semua usia.">
+          <div class="menu-card__img-wrap is-placeholder">
+            <img src="images/man8.jpeg" alt="Kentang goreng" loading="lazy" />
+          </div>
+          <span class="menu-card__qty"></span>
+          <p class="menu-card__name">Susu Coklat </p>
+          <p class="menu-card__price">Rp.9.000</p>
+        </article>
+
+        <article class="menu-card" data-id="teh-tarik-hangat" data-name="Teh Tarik Hangat" data-price="8000" data-desc="Teh tarik hangat dengan busa lembut dan rasa creamy khas teh tarik.">
+          <div class="menu-card__img-wrap is-placeholder">
+            <img src="images/man9.jpeg" alt="Kentang goreng" loading="lazy" />
+          </div>
+          <span class="menu-card__qty"></span>
+          <p class="menu-card__name">Teh Tarik </p>
+          <p class="menu-card__price">Rp.8.000</p>
+        </article>
+
+        <article class="menu-card" data-id="es-kelapa-muda" data-name="Es Kelapa Muda" data-price="10000" data-desc="Kelapa muda segar dengan sedikit sirup dan es, menyegarkan di siang hari.">
+          <div class="menu-card__img-wrap is-placeholder">
+            <img src="images/man10.jpeg" alt="Kentang goreng" loading="lazy" />
+          </div>
+          <span class="menu-card__qty"></span>
+          <p class="menu-card__name">Es Kelapa Muda</p>
+          <p class="menu-card__price">Rp.10.000</p>
+        </article>
+      </div>
+
+      <div class="menu-grid" data-category-panel="camilan" style="display: none;">
+        <article class="menu-card" data-id="kentang-goreng" data-name="Kentang Goreng" data-price="10000" data-desc="Kentang goreng renyah di luar lembut di dalam, disajikan hangat dengan taburan garam.">
+          <div class="menu-card__img-wrap is-placeholder">
+             <img src="images/mil1.png" alt="Kentang goreng" loading="lazy" />
+          </div>
+          <span class="menu-card__qty"></span>
+          <p class="menu-card__name">Kentang Goreng</p>
+          <p class="menu-card__price">Rp.10.000</p>
+        </article>
+
+        <article class="menu-card" data-id="usus-krispi" data-name="Usus Krispi" data-price="7000" data-desc="Usus ayam yang digoreng kering dan renyah, camilan favorit teman makan.">
+          <div class="menu-card__img-wrap is-placeholder">
+            <img src="images/mil2.png" alt="Kentang goreng" loading="lazy" />
+          </div>
+          <span class="menu-card__qty"></span>
+          <p class="menu-card__name">Usus Krispi</p>
+          <p class="menu-card__price">Rp.7.000</p>
+        </article>
+
+        <article class="menu-card" data-id="tahu-crispy" data-name="Tahu Crispy" data-price="8000" data-desc="Tahu goreng dengan lapisan tepung renyah, disajikan dengan saus sambal kacang.">
+          <div class="menu-card__img-wrap is-placeholder">
+            <img src="images/mil3.png" alt="Kentang goreng" loading="lazy" />
+          </div>
+          <span class="menu-card__qty"></span>
+          <p class="menu-card__name">Tahu Crispy</p>
+          <p class="menu-card__price">Rp.8.000</p>
+        </article>
+
+        <article class="menu-card" data-id="risol-mayo" data-name="Risol Mayo" data-price="9000" data-desc="Risol isi sayuran dan sosis dengan saus mayo lembut di dalamnya.">
+          <div class="menu-card__img-wrap is-placeholder">
+            <img src="images/mil4.png" alt="Kentang goreng" loading="lazy" />
+          </div>
+          <span class="menu-card__qty"></span>
+          <p class="menu-card__name">Risol Mayo</p>
+          <p class="menu-card__price">Rp.9.000</p>
+        </article>
+
+        <article class="menu-card" data-id="pisang-goreng" data-name="Pisang Goreng" data-price="7000" data-desc="Pisang goreng tepung crispy dengan rasa manis alami, enak disantap hangat.">
+          <div class="menu-card__img-wrap is-placeholder">
+            <img src="images/mil5.png" alt="Kentang goreng" loading="lazy" />
+          </div>
+          <span class="menu-card__qty"></span>
+          <p class="menu-card__name">Pisang Goreng</p>
+          <p class="menu-card__price">Rp.7.000</p>
+        </article>
+
+        <article class="menu-card" data-id="cireng-bumbu-rujak" data-name="Cireng Bumbu Rujak" data-price="7000" data-desc="Cireng kenyal goreng dengan siraman bumbu rujak pedas manis khas Sunda.">
+          <div class="menu-card__img-wrap is-placeholder">
+            <img src="images/mil6.png" alt="Kentang goreng" loading="lazy" />
+          </div>
+          <span class="menu-card__qty"></span>
+          <p class="menu-card__name">Cireng Bumbu Rujak</p>
+          <p class="menu-card__price">Rp.7.000</p>
+        </article>
+
+        <article class="menu-card" data-id="onion-rings" data-name="Onion Rings" data-price="11000" data-desc="Bawang bombai goreng tepung renyah, gurih dan cocok jadi teman ngemil.">
+          <div class="menu-card__img-wrap is-placeholder">
+            <img src="images/mil7.png" alt="Kentang goreng" loading="lazy" />
+          </div>
+          <span class="menu-card__qty"></span>
+          <p class="menu-card__name">Onion Rings</p>
+          <p class="menu-card__price">Rp.11.000</p>
+        </article>
+
+        <article class="menu-card" data-id="sosis-goreng" data-name="Sosis Goreng" data-price="9000" data-desc="Sosis goreng dengan saus sambal dan mayo, camilan simpel yang selalu disukai.">
+          <div class="menu-card__img-wrap is-placeholder">
+            <img src="images/mil8.png" alt="Kentang goreng" loading="lazy" />
+          </div>
+          <span class="menu-card__qty"></span>
+          <p class="menu-card__name">Sosis Goreng</p>
+          <p class="menu-card__price">Rp.9.000</p>
+        </article>
+
+        <article class="menu-card" data-id="dimsum-ayam" data-name="Dimsum Ayam" data-price="12000" data-desc="Dimsum ayam kukus lembut dengan isian daging ayam cincang berbumbu.">
+          <div class="menu-card__img-wrap is-placeholder">
+            <img src="images/mil9.png" alt="Kentang goreng" loading="lazy" />
+          </div>
+          <span class="menu-card__qty"></span>
+          <p class="menu-card__name">Dimsum Ayam</p>
+          <p class="menu-card__price">Rp.12.000</p>
+        </article>
+
+        <article class="menu-card" data-id="kerupuk-udang" data-name="Kerupuk Udang" data-price="5000" data-desc="Kerupuk udang renyah dengan rasa gurih khas udang asli.">
+          <div class="menu-card__img-wrap is-placeholder">
+            <img src="images/mil10.png" alt="Kentang goreng" loading="lazy" />
+          </div>
+          <span class="menu-card__qty"></span>
+          <p class="menu-card__name">Kerupuk Udang</p>
+          <p class="menu-card__price">Rp.5.000</p>
+        </article>
+      </div>
+    </main>
+
+    <a href="pembayaran.html" class="cart-fab" aria-label="Lihat keranjang">
+      <img src="images/logo.png" alt="" />
+      <span class="cart-fab__badge">0</span>
+    </a>
+
+    <div class="detail-overlay" data-detail-overlay>
+      <div class="detail-sheet" data-detail-sheet>
+        <div class="detail-sheet__handle"></div>
+        <button class="detail-sheet__close" data-detail-close aria-label="Tutup">✕</button>
+
+        <div class="detail-sheet__media" data-detail-media></div>
+
+        <div class="detail-sheet__body">
+          <h3 class="detail-sheet__name" data-detail-name></h3>
+          <p class="detail-sheet__price" data-detail-price></p>
+          <p class="detail-sheet__desc" data-detail-desc></p>
+
+          <div class="detail-sheet__note">
+            <label for="detail-note-input">Catatan khusus (opsional)</label>
+            <textarea id="detail-note-input" data-detail-note rows="2" placeholder="cth: pedas sedikit, tanpa bawang..."></textarea>
+          </div>
+
+          <div class="detail-sheet__qty">
+            <button class="qty-btn qty-btn--minus" data-detail-minus aria-label="Kurangi">&minus;</button>
+            <span class="detail-sheet__qty-count" data-detail-qty>0</span>
+            <button class="qty-btn qty-btn--plus" data-detail-plus aria-label="Tambah">+</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

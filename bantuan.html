@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RESTOKU — Bantuan</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="icon" href="images/logo.png" />
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    /* ── Bantuan Hero ── */
+    .help-hero {
+      background: linear-gradient(135deg, var(--brand-1) 0%, var(--brand-2) 100%);
+      margin: 0 16px 24px;
+      border-radius: 20px;
+      padding: 28px 22px 26px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .help-hero::before {
+      content:''; position:absolute; top:-30px; right:-30px;
+      width:110px; height:110px; border-radius:50%;
+      background:rgba(255,255,255,.08);
+    }
+    .help-hero::after {
+      content:''; position:absolute; bottom:-25px; left:-20px;
+      width:80px; height:80px; border-radius:50%;
+      background:rgba(255,255,255,.06);
+    }
+    .help-hero__icon {
+      font-size:2.2rem; margin-bottom:10px; line-height:1;
+    }
+    .help-hero__title {
+      font-family:'Poppins',sans-serif;
+      font-size:1.35rem; font-weight:700; color:#fff;
+      margin:0 0 6px;
+    }
+    .help-hero__sub {
+      font-size:.85rem; color:rgba(255,255,255,.85);
+      margin:0; line-height:1.5;
+    }
+
+    /* ── Section label ── */
+    .help-section-label {
+      font-family:'Poppins',sans-serif;
+      font-size:.78rem; font-weight:700; letter-spacing:.8px;
+      text-transform:uppercase; color:var(--ink-soft);
+      padding:0 20px; margin-bottom:10px;
+    }
+
+    /* ── FAQ ── */
+    .faq-list {
+      padding: 0 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 28px;
+    }
+
+    .faq-item {
+      background: var(--gray-200);
+      border-radius: 14px;
+      overflow: hidden;
+    }
+
+    .faq-item__q {
+      width: 100%;
+      background: none;
+      text-align: left;
+      padding: 16px 16px;
+      font-size: .92rem;
+      font-weight: 600;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      color: var(--ink);
+      cursor: pointer;
+      border: none;
+    }
+
+    .faq-item__q-left {
+      display: flex; align-items: center; gap: 12px;
+    }
+    .faq-item__emoji {
+      width: 34px; height: 34px; border-radius: 9px;
+      background: linear-gradient(135deg, var(--brand-1), var(--brand-2));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem; flex-shrink: 0;
+    }
+
+    .faq-item__q .chevron {
+      transition: transform .2s;
+      font-size: .8rem; color: var(--ink-soft); flex-shrink: 0;
+    }
+    .faq-item.is-open .chevron { transform: rotate(180deg); }
+
+    .faq-item__a {
+      max-height: 0; overflow: hidden;
+      transition: max-height .28s ease;
+      padding: 0 16px;
+      font-size: .86rem; color: var(--ink-soft); line-height: 1.6;
+    }
+    .faq-item.is-open .faq-item__a { padding-bottom: 16px; }
+
+    /* ── Quick tips ── */
+    .help-tips {
+      padding: 0 16px;
+      display: flex; flex-direction: column; gap: 8px;
+      margin-bottom: 28px;
+    }
+    .help-tip {
+      display: flex; align-items: center; gap: 12px;
+      background: var(--gray-200);
+      border-radius: 12px; padding: 12px 14px;
+    }
+    .help-tip__icon { font-size:1.3rem; flex-shrink:0; line-height:1; }
+    .help-tip__text { font-size:.84rem; color:var(--ink-soft); line-height:1.45; }
+    .help-tip__text strong { color:var(--ink); }
+
+    /* ── Contact card ── */
+    .help-contact {
+      margin: 0 16px 32px;
+      background: var(--gray-200);
+      border-radius: 18px;
+      overflow: hidden;
+    }
+    .help-contact__header {
+      background: linear-gradient(135deg, var(--brand-1), var(--brand-2));
+      padding: 16px 18px;
+      display: flex; align-items: center; gap: 12px;
+    }
+    .help-contact__header-icon { font-size:1.4rem; }
+    .help-contact__header-title {
+      font-family:'Poppins',sans-serif;
+      font-size:.95rem; font-weight:700; color:#fff;
+    }
+    .help-contact__header-sub { font-size:.75rem; color:rgba(255,255,255,.8); margin-top:1px; }
+
+    .help-contact__items { padding: 8px 0; }
+    .help-contact__row {
+      display: flex; align-items: center; gap: 14px;
+      padding: 13px 18px;
+      border-bottom: 1px solid rgba(0,0,0,.06);
+    }
+    .help-contact__row:last-child { border-bottom: none; }
+    .help-contact__row-icon {
+      width: 36px; height: 36px; border-radius: 10px;
+      background: #fff;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; box-shadow: 0 1px 4px rgba(0,0,0,.08);
+    }
+    .help-contact__row-icon img { width: 20px; height: 20px; object-fit: contain; }
+    .help-contact__row-body { flex: 1; }
+    .help-contact__row-label { font-size:.73rem; color:var(--ink-soft); }
+    .help-contact__row-value {
+      font-weight:600; font-size:.88rem; color:var(--ink); margin-top:1px;
+    }
+    .help-contact__row-value a { color:var(--brand-1); }
+    .help-contact__row-arrow { color:var(--ink-soft); font-size:.8rem; }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <header class="topnav">
+      <a href="index.html" class="topnav__brand">
+        <img src="images/logo.png" alt="Logo RESTOKU" />
+        <span class="topnav__brand-text">Restoku</span>
+      </a>
+      <button class="topnav__hamburger" id="nav-hamburger" aria-label="Menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="topnav__dropdown" id="nav-dropdown">
+        <a href="tentang.html"><span class="nav-icon">📖</span> Tentang</a>
+        <a href="bantuan.html" class="is-active"><span class="nav-icon">❓</span> Bantuan</a>
+        <a href="riwayat.html"><span class="nav-icon">🕑</span> Riwayat</a>
+        <a href="login.html"><span class="nav-icon">👤</span> Log in</a>
+      </div>
+      <div class="nav-dim" id="nav-dim"></div>
+    </header>
+
+    <!-- Hero -->
+    <div class="help-hero">
+      <div class="help-hero__icon">🛟</div>
+      <h1 class="help-hero__title">Pusat Bantuan</h1>
+      <p class="help-hero__sub">Ada yang bisa kami bantu?<br>Temukan jawaban di bawah ini.</p>
+    </div>
+
+    <!-- FAQ -->
+    <div class="help-section-label">Pertanyaan Umum</div>
+    <div class="faq-list">
+
+      <div class="faq-item">
+        <button class="faq-item__q">
+          <span class="faq-item__q-left">
+            <span class="faq-item__emoji">🛒</span>
+            Bagaimana cara memesan?
+          </span>
+          <span class="chevron">▾</span>
+        </button>
+        <div class="faq-item__a">
+          Pilih menu yang kamu inginkan dari halaman utama, ketuk kartu untuk melihat detail dan atur jumlahnya, lalu buka keranjang dan lanjutkan ke pembayaran.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-item__q">
+          <span class="faq-item__q-left">
+            <span class="faq-item__emoji">🕑</span>
+            Kenapa riwayat kosong?
+          </span>
+          <span class="chevron">▾</span>
+        </button>
+        <div class="faq-item__a">
+          Riwayat hanya tersimpan di perangkat yang digunakan saat memesan. Pastikan kamu membuka halaman riwayat di perangkat yang sama.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-item__q">
+          <span class="faq-item__q-left">
+            <span class="faq-item__emoji">💳</span>
+            Gagal melakukan pembayaran?
+          </span>
+          <span class="chevron">▾</span>
+        </button>
+        <div class="faq-item__a">
+          Periksa kembali metode pembayaran dan pastikan koneksi internet stabil, lalu ulangi proses pembayaran. Jika masih gagal, hubungi kami langsung.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-item__q">
+          <span class="faq-item__q-left">
+            <span class="faq-item__emoji">🔒</span>
+            Tidak bisa log in?
+          </span>
+          <span class="chevron">▾</span>
+        </button>
+        <div class="faq-item__a">
+          Pastikan email dan sandi yang dimasukkan sudah benar. Gunakan fitur "Lupa sandi?" di halaman login untuk mengatur ulang akses akunmu.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-item__q">
+          <span class="faq-item__q-left">
+            <span class="faq-item__emoji">⏱️</span>
+            Berapa lama estimasi pesanan?
+          </span>
+          <span class="chevron">▾</span>
+        </button>
+        <div class="faq-item__a">
+          Estimasi pengerjaan pesanan sekitar 10–15 menit tergantung antrian dapur. Kamu bisa memantau status pesanan secara real-time di halaman struk setelah checkout.
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Tips -->
+    <div class="help-section-label">Tips Cepat</div>
+    <div class="help-tips">
+      <div class="help-tip">
+        <span class="help-tip__icon">💡</span>
+        <span class="help-tip__text"><strong>Ketuk kartu menu</strong> untuk melihat deskripsi lengkap dan menambahkan catatan khusus ke pesanan.</span>
+      </div>
+      <div class="help-tip">
+        <span class="help-tip__icon">📝</span>
+        <span class="help-tip__text"><strong>Isi nama & nomor meja</strong> dengan benar agar pesanan diantar ke meja yang tepat.</span>
+      </div>
+      <div class="help-tip">
+        <span class="help-tip__icon">⭐</span>
+        <span class="help-tip__text"><strong>Beri rating</strong> setelah pesananmu selesai — masukanmu sangat membantu kami berkembang!</span>
+      </div>
+    </div>
+
+    <!-- Kontak -->
+    <div class="help-section-label">Hubungi Kami</div>
+    <div class="help-contact">
+      <div class="help-contact__header">
+        <span class="help-contact__header-icon">📞</span>
+        <div>
+          <div class="help-contact__header-title">Tim Support Restoku</div>
+          <div class="help-contact__header-sub">Siap membantu kamu setiap saat</div>
+        </div>
+      </div>
+      <div class="help-contact__items">
+        <a href="tel:+621234567889" class="help-contact__row" style="text-decoration:none">
+          <div class="help-contact__row-icon">
+            <img src="images/phone.png" alt="Telepon" />
+          </div>
+          <div class="help-contact__row-body">
+            <div class="help-contact__row-label">Telepon</div>
+            <div class="help-contact__row-value">+62 1234-567-889</div>
+          </div>
+          <span class="help-contact__row-arrow">›</span>
+        </a>
+        <a href="mailto:bantuan@restoku.id" class="help-contact__row" style="text-decoration:none">
+          <div class="help-contact__row-icon">
+            <img src="images/headset.png" alt="Email" />
+          </div>
+          <div class="help-contact__row-body">
+            <div class="help-contact__row-label">Email Bantuan</div>
+            <div class="help-contact__row-value">bantuan@restoku.id</div>
+          </div>
+          <span class="help-contact__row-arrow">›</span>
+        </a>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

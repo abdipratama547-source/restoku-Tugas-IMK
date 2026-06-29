@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RESTOKU — Pembayaran</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="icon" href="images/logo.png" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <div class="app">
+    <div class="backbar">
+      <a href="index.html">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M15 18l-6-6 6-6" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+        Kembali ke menu
+      </a>
+    </div>
+
+    <div class="pay-panel">
+      <p class="empty-cart-msg" data-empty-cart style="display:none;">
+        Keranjang kamu masih kosong.<br />
+        <a href="index.html">Pilih menu dulu yuk</a>
+      </p>
+
+      <form data-payment-form>
+        <div class="field-row">
+          <label for="nama">Nama</label>
+          <input type="text" id="nama" placeholder="Masukkan nama" required />
+        </div>
+        <div class="field-row">
+          <label for="meja">No. Meja</label>
+          <input type="text" id="meja" placeholder="Masukkan no. meja" required />
+        </div>
+
+        <h2 class="order-title">Rincian pesanan</h2>
+        <div data-order-lines></div>
+
+        <div class="order-total">
+          <span>Total :</span>
+          <span data-order-total>Rp.0</span>
+        </div>
+
+        <details class="pay-method" open>
+          <summary>Metode Pembayaran <span>›</span></summary>
+          <label class="pay-method__option">
+            <input type="radio" name="metode" value="QRIS" />
+            QRIS
+          </label>
+          <label class="pay-method__option">
+            <input type="radio" name="metode" value="Tunai" />
+            Tunai
+          </label>
+          <label class="pay-method__option">
+            <input type="radio" name="metode" value="Kartu Debit" />
+            Kartu Debit
+          </label>
+        </details>
+
+        <div class="pay-footer">
+          <button type="submit" class="btn-primary">Pesan Sekarang</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ===== Konfirmasi Modal (Point 4) ===== -->
+  <div class="confirm-overlay" id="confirm-overlay">
+    <div class="confirm-modal">
+      <div class="confirm-modal__icon">📋</div>
+      <h3 class="confirm-modal__title">Konfirmasi Pesanan</h3>
+
+      <div class="confirm-meta">
+        <div class="confirm-meta__row">
+          <span>Meja</span>
+          <strong id="confirm-meja">-</strong>
+        </div>
+        <div class="confirm-meta__row">
+          <span>Nama</span>
+          <strong id="confirm-nama">-</strong>
+        </div>
+        <div class="confirm-meta__row">
+          <span>Pembayaran</span>
+          <strong id="confirm-metode">-</strong>
+        </div>
+      </div>
+
+      <ul class="confirm-items" id="confirm-items"></ul>
+
+      <div class="confirm-total">
+        <span>Total</span>
+        <span id="confirm-total">Rp 0</span>
+      </div>
+
+      <div class="confirm-actions">
+        <button class="confirm-btn confirm-btn--no"  id="confirm-no">Ubah Pesanan</button>
+        <button class="confirm-btn confirm-btn--yes" id="confirm-yes">Ya, Pesan! 🚀</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

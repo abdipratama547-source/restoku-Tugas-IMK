@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RESTOKU — Struk</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link rel="icon" href="images/logo.png" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <div class="app">
+    <div class="backbar">
+      <a href="index.html">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M15 18l-6-6 6-6" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+        Kembali ke menu
+      </a>
+    </div>
+
+    <!-- ===== Live Order Tracker (Point 4) ===== -->
+    <div id="live-tracker" class="live-tracker">
+      <!-- diisi oleh JS -->
+      <div class="tracker-steps">
+        <div class="tracker-step is-active">
+          <div class="tracker-step__dot"></div>
+          <div class="tracker-step__connector"></div>
+          <div class="tracker-step__label">Pesanan Diterima</div>
+        </div>
+        <div class="tracker-step">
+          <div class="tracker-step__dot"></div>
+          <div class="tracker-step__connector"></div>
+          <div class="tracker-step__label">Sedang Dimasak</div>
+        </div>
+        <div class="tracker-step">
+          <div class="tracker-step__dot"></div>
+          <div class="tracker-step__connector"></div>
+          <div class="tracker-step__label">Siap Disajikan</div>
+        </div>
+      </div>
+      <div class="tracker-eta">Estimasi ~10–15 menit</div>
+    </div>
+
+    <div class="receipt-wrap">
+      <div class="receipt">
+        <div class="receipt__icon">
+          <img src="images/logo.png" alt="Logo RESTOKU" />
+        </div>
+
+        <div class="receipt__meta">
+          Nama &nbsp;&nbsp;: <span data-receipt-nama>-</span><br />
+          No.Meja : <span data-receipt-meja>-</span>
+        </div>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Menu</th>
+              <th>Jumlah</th>
+              <th>Harga</th>
+            </tr>
+          </thead>
+          <tbody data-receipt-body>
+            <tr>
+              <td>Ayam Kecap</td>
+              <td>x 1</td>
+              <td>Rp.17.000</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="receipt__total">
+          <span>Total:</span>
+          <span data-receipt-total>Rp.0</span>
+        </div>
+
+        <div class="receipt-actions">
+          <a href="index.html">Pesan lagi</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== Rating Modal (Point 4) ===== -->
+  <div class="rating-modal-overlay" id="rating-modal">
+    <div class="rating-modal">
+      <div class="rating-modal__emoji">⭐</div>
+      <h3>Bagaimana pengalamanmu?</h3>
+      <p>Berikan penilaian untuk pesanan ini</p>
+      <div class="rating-stars">
+        <span class="rating-star" data-val="1">★</span>
+        <span class="rating-star" data-val="2">★</span>
+        <span class="rating-star" data-val="3">★</span>
+        <span class="rating-star" data-val="4">★</span>
+        <span class="rating-star" data-val="5">★</span>
+      </div>
+      <div class="rating-actions">
+        <button id="rating-submit" class="btn-primary">Kirim Rating</button>
+        <button id="rating-skip"   class="btn-ghost">Lewati</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
